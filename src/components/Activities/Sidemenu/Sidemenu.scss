@@ -1,0 +1,29 @@
+.activities-aside-menu {
+  max-width: 225px;
+
+  .ant-menu {
+    min-height: 100vh;
+
+    &::before {
+      display: none;
+    }
+
+    & :first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .activities-aside-menu {
+    max-width: unset;
+    width: 100%;
+    flex-basis: 100%;
+
+    .ant-menu {
+      min-height: unset;
+      width: 100%;
+      flex-basis: 100%;
+    }
+  }
+}

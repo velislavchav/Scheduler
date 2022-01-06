@@ -1,0 +1,23 @@
+.activities-container {
+  display: flex;
+  align-self: flex-start;
+
+  .activities-aside-menu {
+    flex-basis: 15%;
+  }
+
+  // .activities-groups-container {
+  //   flex-basis: 85%;
+  // }
+}
+
+@media screen and (max-width: 768px) {
+  .activities-container {
+    display: block;
+    
+    .activities-aside-menu, .activities-groups-container {
+      flex-basis: 100%;
+      width: 100%;
+    }
+  }
+}
