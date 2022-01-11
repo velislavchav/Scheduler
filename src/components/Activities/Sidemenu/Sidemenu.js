@@ -2,14 +2,11 @@ import React, { useState } from 'react'
 import { Menu, Button } from 'antd';
 import {
     MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    PieChartOutlined,
-    DesktopOutlined,
-    ContainerOutlined,
+    MenuFoldOutlined
 } from '@ant-design/icons';
 import "./Sidemenu.scss"
 
-export default function Sidemenu() {
+export default function Sidemenu({ categories }) {
     const [collapsed, setCollapsed] = useState(false)
 
     const toggleCollapsed = () => {
@@ -28,15 +25,15 @@ export default function Sidemenu() {
                 <Menu.Item key="collapse" className='text-center' onClick={toggleCollapsed}>
                     {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </Menu.Item>
-                <Menu.Item key="1" icon={<PieChartOutlined />}>
-                    Option 1
-                </Menu.Item>
-                <Menu.Item key="2" icon={<DesktopOutlined />}>
-                    Option 2
-                </Menu.Item>
-                <Menu.Item key="3" icon={<ContainerOutlined />}>
-                    Option 3
-                </Menu.Item>
+                {categories.map(category => {
+                    return <Menu.SubMenu key={category.title} title={category.title}>
+                        {category.subcategories.map(subcategory => {
+                            return <Menu.Item key={subcategory.title}>
+                                {subcategory.title}
+                            </Menu.Item>
+                        })}
+                    </Menu.SubMenu>
+                })}
             </Menu>
         </aside >
     )
