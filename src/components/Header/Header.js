@@ -1,10 +1,34 @@
-import React from 'react';
-import { Layout, Menu } from 'antd';
-import { UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+// Redux
+import { connect } from "react-redux";
+import { loadCategories } from "../../redux/actions/categoriesAction";
+import { selectLanguage } from "../../redux/actions/languageAction";
+
+// Antd
+import { Layout, Menu } from 'antd';
+import { UserOutlined, GlobalOutlined } from '@ant-design/icons';
 import "./Header.scss"
 
-export default function Header() {
+// Components
+import ServicesMenu from './ServicesMenu';
+
+// Helpers
+import { checkIsLanguageValid } from "../../utils/helpers"
+
+function Header({ categories, language, loadCategories, selectLanguage }) {
+    useEffect(() => {
+        loadCategories();
+    }, [])
+
+    function handleChangeLanguage(ev) {
+        const userLanguageSelection = ev.key || null;
+        if (checkIsLanguageValid(userLanguageSelection) && userLanguageSelection !== language) {
+            selectLanguage(userLanguageSelection);
+        }
+    }
+
     return (
         <Layout className="layout header-layout">
             <Layout.Header className="header">
@@ -13,23 +37,32 @@ export default function Header() {
                 </Link>
                 <Menu className="header-menu-container" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                     <Menu.Item key="home"><Link to={"/"}>Начало</Link></Menu.Item>
-                    <Menu.SubMenu key="activities" icon={<UnorderedListOutlined />} title="Дейности">
-                        {/* <Menu.ItemGroup title="Item 1"> */}
-                        <Menu.Item key="setting:1">Фризъорство</Menu.Item>
-                        <Menu.Item key="setting:2">Маникюр</Menu.Item>
-                        <Menu.Item key="setting:3">Педикюр</Menu.Item>
-                        <Menu.Item key="setting:4"><Link to={"/activities"}>Виж всички</Link></Menu.Item>
-                        {/* </Menu.ItemGroup> */}
-                    </Menu.SubMenu>
-                    {/* <Menu.Item key="about-us"><Link to={"/about-us"}>За нас</Link></Menu.Item> */}
+                    <ServicesMenu categories={categories} />
                     <Menu.SubMenu key="my-profile" icon={<UserOutlined />} title="Моят профил">
                         <Menu.Item key="profile"><Link to={"/profile"}> Профил </Link></Menu.Item>
                         <Menu.Item key="schedule"> График </Menu.Item>
-                        <Menu.Item key="logout"> Изход </Menu.Item> 
+                        <Menu.Item key="logout"> Изход </Menu.Item>
                     </Menu.SubMenu>
-
+                    <Menu.SubMenu key="languages" icon={<GlobalOutlined />} >
+                        <Menu.Item key="ENG" onClick={handleChangeLanguage} value="ENG"> ENG </Menu.Item>
+                        <Menu.Item key="BG" onClick={handleChangeLanguage} value="BG"> BG </Menu.Item>
+                    </Menu.SubMenu>
                 </Menu>
             </Layout.Header>
-        </Layout>
+        </Layout >
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        language: state.language,
+        categories: state.categories,
+    }
+}
+
+const mapDispatchToProps = {
+    loadCategories,
+    selectLanguage
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
