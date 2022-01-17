@@ -1,15 +1,27 @@
-import React from 'react';
-import { Carousel } from 'antd';
+import content from "./HomeContent";
+import { Link } from "react-router-dom";
+import { Button } from 'antd';
+import "./Home.scss"
 
-export default function Home() {
+export default function Home({ language }) {
     return (
-        <Carousel autoplay>
-            <div>
-                <img src='https://images.unsplash.com/photo-1495364141860-b0d03eccd065?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGltZSUyMHNjaGVkdWxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80' width={"100%"} />
-            </div>
-            <div>
-                <img src='https://image.shutterstock.com/image-vector/banner-time-management-concept-vector-260nw-752232736.jpg' width={"100%"} />
-            </div>
-        </Carousel>
+        <>
+            <section id="home-page">
+                <article className="home-page-image-left-text">
+                    <h2> {content[language].title1} <br /> {content[language].title2} </h2>
+                    <Button color="primary" className="sign-in-home-button"><Link to="/login">{content[language].loginBtn}</Link></Button>
+                </article>
+            </section>
+            <section id="home-page-advantages">
+                <h3> {content[language].advantages.bigTitle} </h3>
+                {content[language]?.advantages?.items?.map(item => {
+                    return <article className="advantage-container">
+                        {/* <PlaceIcon fontSize="large"></PlaceIcon> */}
+                        <h4> {item.title} </h4>
+                        <p> {item.description} </p>
+                    </article>
+                })}
+            </section>
+        </>
     )
 }

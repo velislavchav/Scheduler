@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Redux
 import { connect } from "react-redux";
 import { loadCategories } from "../../redux/actions/categoriesAction";
-import { selectLanguage } from "../../redux/actions/languageAction";
 
 // Antd
 import { Layout, Menu } from 'antd';
@@ -15,19 +14,12 @@ import "./Header.scss"
 import ServicesMenu from './ServicesMenu';
 
 // Helpers
-import { checkIsLanguageValid } from "../../utils/helpers"
+import headerContent from "./HeaderContent";
 
-function Header({ categories, language, loadCategories, selectLanguage }) {
+function Header({ categories, loadCategories, setNewLanguage, language}) {
     useEffect(() => {
         loadCategories();
     }, [])
-
-    function handleChangeLanguage(ev) {
-        const userLanguageSelection = ev.key || null;
-        if (checkIsLanguageValid(userLanguageSelection) && userLanguageSelection !== language) {
-            selectLanguage(userLanguageSelection);
-        }
-    }
 
     return (
         <Layout className="layout header-layout">
@@ -36,16 +28,16 @@ function Header({ categories, language, loadCategories, selectLanguage }) {
                     <div className="logo" />
                 </Link>
                 <Menu className="header-menu-container" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                    <Menu.Item key="home"><Link to={"/"}>Начало</Link></Menu.Item>
-                    <ServicesMenu categories={categories} />
-                    <Menu.SubMenu key="my-profile" icon={<UserOutlined />} title="Моят профил">
-                        <Menu.Item key="profile"><Link to={"/profile"}> Профил </Link></Menu.Item>
-                        <Menu.Item key="schedule"> График </Menu.Item>
-                        <Menu.Item key="logout"> Изход </Menu.Item>
+                    <Menu.Item key="home"><Link to={"/"}>{ headerContent[language].home }</Link></Menu.Item>
+                    <ServicesMenu categories={categories} servicesTranslated={headerContent[language].services} language={language}/>
+                    <Menu.SubMenu key="my-profile" icon={<UserOutlined />} title={ headerContent[language].myProfile}>
+                        <Menu.Item key="profile"><Link to={"/profile"}> { headerContent[language].profile } </Link></Menu.Item>
+                        <Menu.Item key="schedule"> { headerContent[language].schedule } </Menu.Item>
+                        <Menu.Item key="logout"> { headerContent[language].logout } </Menu.Item>
                     </Menu.SubMenu>
                     <Menu.SubMenu key="languages" icon={<GlobalOutlined />} >
-                        <Menu.Item key="ENG" onClick={handleChangeLanguage} value="ENG"> ENG </Menu.Item>
-                        <Menu.Item key="BG" onClick={handleChangeLanguage} value="BG"> BG </Menu.Item>
+                        <Menu.Item key="ENG" onClick={setNewLanguage} value="ENG"> {headerContent[language].languageENG} </Menu.Item>
+                        <Menu.Item key="BG" onClick={setNewLanguage} value="BG"> {headerContent[language].languageBG} </Menu.Item>
                     </Menu.SubMenu>
                 </Menu>
             </Layout.Header>
@@ -55,14 +47,12 @@ function Header({ categories, language, loadCategories, selectLanguage }) {
 
 function mapStateToProps(state) {
     return {
-        language: state.language,
         categories: state.categories,
     }
 }
 
 const mapDispatchToProps = {
     loadCategories,
-    selectLanguage
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

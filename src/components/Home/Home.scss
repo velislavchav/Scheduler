@@ -1,0 +1,136 @@
+// @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+@import "../../variables.scss";
+$imageContainerHeight: 960px;
+
+#home-page {
+    background-image: url(../../../public/home-img.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    // position: absolute;
+    width: 100%;
+    height: $imageContainerHeight;
+
+    .home-page-image-left-text {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        flex-basis: 100%;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 50px;
+        top: 150px;
+        text-align: center;
+
+        h2 {
+            // font-family: "Fredoka One", cursive;
+            font-size: 62px;
+            font-weight: 400;
+            color: $darkThemeBackgroundColor;
+            margin-bottom: 30px;
+        }
+
+        .sign-in-home-button {
+            width: 100%;
+            min-height: 48px;
+            background-color: $darkThemeBackgroundColor; //#11217e;
+            color: #eef9ff;
+
+            &:hover {
+                background-color: #eef9ff; //#11217e;
+                color: $darkThemeBackgroundColor;
+            }
+        }
+    }
+}
+
+#home-page-advantages {
+    // position: absolute;
+    top: $imageContainerHeight + 100px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    justify-content: center;
+    align-items: flex-start;
+
+    h3 {
+        // font-family: "Fredoka One", cursive;
+        color: $darkThemeBackgroundColor;
+        font-size: 44px;
+        flex-basis: 100%;
+        text-align: center;
+    }
+
+    .advantage-container {
+        margin: 25px 0 100px 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-basis: 28%;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            flex-basis: 85%;
+            text-align: center;
+        }
+
+        p {
+            flex-basis: 85%;
+            text-align: justify;
+        }
+
+        h4 {
+            flex-basis: 85%;
+            text-align: center;
+            // font-family: "DM Sans", sans-serif;
+            color: $darkThemeBackgroundColor;
+            font-size: 22px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #home-page {
+        background-position: left center;
+
+        .home-page-image-left-text {
+            position: static;
+            margin-top: 8vh;
+
+            h2 {
+                font-size: 33px;
+            }
+
+            .sign-in-home-button {
+                margin-top: 15px;
+                width: 90%;
+                min-height: 48px;
+            }
+        }
+    }
+
+    #home-page-advantages {
+        position: absolute;
+        top: $imageContainerHeight - 525px;
+
+        h3 {
+            // font-family: "Fredoka One", cursive;
+            color: $darkThemeBackgroundColor;
+            font-size: 26px;
+            flex-basis: 100%;
+            text-align: center;
+        }
+
+        .advantage-container {
+            margin: 0 0 35px 0;
+            flex-basis: 100%;
+
+            * {
+                flex-basis: 100%;
+                margin: 5px 0;
+            }
+        }
+    }
+}

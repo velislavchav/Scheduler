@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 // Libraries
 import { Route, Routes } from 'react-router-dom';
 
@@ -6,13 +8,31 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import Home from './Home/Home';
 import Activities from './Activities/Activities';
+import { getSelectedLanguage, changeLanguage, checkIsLanguageValid } from '../utils/helpers';
 
 function App() {
+  const [language, setLanguage] = useState("BG");
+
+  useEffect(() => {
+    const languageFromLocalStorage = getSelectedLanguage();
+    if (language !== languageFromLocalStorage) {
+      setLanguage(languageFromLocalStorage);
+    }
+  }, [language])
+
+  function handleChangeLanguage(ev) {
+    const userLanguageSelection = ev.key || null;
+    if (checkIsLanguageValid(userLanguageSelection) && userLanguageSelection !== getSelectedLanguage()) {
+      changeLanguage(userLanguageSelection);
+      setLanguage(userLanguageSelection);
+    }
+  }
+
   return (
     <>
-      <Header />
+      <Header language={language} setNewLanguage={handleChangeLanguage} />
       <Routes >
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home language={language} />} />
         <Route path="/activities" element={<Activities />} />
       </Routes >
       <Footer />
