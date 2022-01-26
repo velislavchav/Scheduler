@@ -6,7 +6,7 @@ import App from './components/App';
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from './redux/configureStore';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
+import './index.scss';
 
 const store = configureStore()
 

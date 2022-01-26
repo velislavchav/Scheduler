@@ -8,6 +8,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import Home from './Home/Home';
 import Activities from './Activities/Activities';
+import AddActivity from './Activities/AddActivity/AddActivity'
 import { getSelectedLanguage, changeLanguage, checkIsLanguageValid } from '../utils/helpers';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Routes >
         <Route path="/" element={<Home language={language} />} />
         <Route path="/services/:category/:subcategory" element={<Activities language={language} />} />
+        <Route path="/add-activity" element={<AddActivity language={language} />} />
       </Routes >
       <Footer />
     </>
