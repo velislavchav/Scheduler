@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { Menu, Button } from 'antd';
+import { Link } from 'react-router-dom';
+import { Menu } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined
 } from '@ant-design/icons';
 import "./Sidemenu.scss"
 
-export default function Sidemenu({ categories }) {
+export default function Sidemenu({ categories, selectedCategory = "", selectedSubcategory = "", language }) {
     const [collapsed, setCollapsed] = useState(false)
 
     const toggleCollapsed = () => {
@@ -16,8 +17,8 @@ export default function Sidemenu({ categories }) {
     return (
         <aside className='activities-aside-menu'>
             <Menu
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                defaultSelectedKeys={[selectedSubcategory]}
+                defaultOpenKeys={[selectedCategory]}
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={collapsed}
@@ -26,10 +27,10 @@ export default function Sidemenu({ categories }) {
                     {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </Menu.Item>
                 {categories.map(category => {
-                    return <Menu.SubMenu key={category.title} title={category.title}>
+                    return <Menu.SubMenu key={category.title?.toLocaleLowerCase()} title={language === "BG" ? category.titleBG : category.title}>
                         {category.subcategories.map(subcategory => {
-                            return <Menu.Item key={subcategory.title}>
-                                {subcategory.title}
+                            return <Menu.Item key={subcategory.title?.toLocaleLowerCase()}>
+                                <Link to={"/services" + subcategory.url}>{language === "BG" ? subcategory.titleBG : subcategory.title}</Link>
                             </Menu.Item>
                         })}
                     </Menu.SubMenu>

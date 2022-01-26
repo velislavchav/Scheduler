@@ -9,7 +9,10 @@ const loadCategoriesSuccess = (categories) => {
 export const loadCategories = () => {
     return (dispatch) => {
         return getActivityCategories()
-            .then(data => dispatch(loadCategoriesSuccess(data.categories)))
+            .then(data => {
+                dispatch(loadCategoriesSuccess(data.categories))
+                return data.categories;
+            })
             .catch(() => handleApiError("Problem with loading categories"))
     }
 }

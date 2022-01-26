@@ -33,7 +33,7 @@ function App() {
       <Header language={language} setNewLanguage={handleChangeLanguage} />
       <Routes >
         <Route path="/" element={<Home language={language} />} />
-        <Route path="/activities" element={<Activities />} />
+        <Route path="/services/:category/:subcategory" element={<Activities language={language} />} />
       </Routes >
       <Footer />
     </>
