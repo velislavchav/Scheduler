@@ -35,7 +35,7 @@ function App() {
       <Routes >
         <Route path="/" element={<Home language={language} />} />
         <Route path="/services/:category/:subcategory" element={<Activities language={language} />} />
-        <Route path="/add-activity" element={<AddActivity language={language} />} />
+        <Route path="/services/add" element={<AddActivity language={language} />} />
       </Routes >
       <Footer />
     </>

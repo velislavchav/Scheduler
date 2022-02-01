@@ -1,4 +1,4 @@
-const content = {
+export const content = {
     BG: {
         addNewActivityTitle: "Добавяне на фирма",
         categoryLabel: "Избери категория",
@@ -45,4 +45,41 @@ const content = {
     }
 }
 
-export default content;
+export const validationMessages = {
+    required: {
+        BG: {
+            category: "Полето 'категория' е задължително!",
+            title: "Полето 'наименование на английски' е задължително!",
+            titleBG: "Полето 'наименование на български' е задължително!",
+            description: "Полето 'описание на английски' е задължително!",
+            descriptionBG: "Полето 'описание на български' е задължително!",
+            address: "Полето 'адрес' е задължително!",
+            dateCreated: "Полето 'дата на стартиране' е задължително!",
+            website: "Полето 'уебсайт' е задължително!",
+            mobilePhone: "Полето 'мобилен телефон' е задължително!",
+            phone: "Полето 'телефон' е задължително!",
+            worktimeDay: "Полето 'ден' е задължително!",
+            worktimeTimeRange: "Въведете часови диапазон!"
+        },
+        ENG: {
+            category: "Please input your category!",
+            title: "Please input your company name!",
+            titleBG: "Please input your company name with bulgarian characters!",
+            description: "Please input your company description!",
+            descriptionBG: "Please input your company description with bulgarian characters!",
+            address: "Please input your address!",
+            dateCreated: "Please input company creation date!",
+            website: "Please input your website!",
+            mobilePhone: "Please input your mobile phone!",
+            phone: "Please input your phone!",
+            worktimeDay: "Missing day",
+            worktimeTimeRange: "Missing time range"
+        }
+    }
+}
+
+export const days = { //days should be same amount and in same order
+    BG: ['Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота', 'Неделя', 'Обедна почивка'],
+    ENG: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Lunch break']
+  };
+  

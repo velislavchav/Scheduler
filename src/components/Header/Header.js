@@ -29,6 +29,7 @@ function Header({ categories, loadCategories, setNewLanguage, language}) {
                 </Link>
                 <Menu className="header-menu-container" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                     <Menu.Item key="home"><Link to={"/"}>{ headerContent[language].home }</Link></Menu.Item>
+                    <Menu.Item key="add"><Link to={"/services/add"}>{ "DOBAVI" }</Link></Menu.Item>
                     <ServicesMenu categories={categories} servicesTranslated={headerContent[language].services} language={language}/>
                     <Menu.SubMenu key="my-profile" icon={<UserOutlined />} title={ headerContent[language].myProfile}>
                         <Menu.Item key="profile"><Link to={"/profile"}> { headerContent[language].profile } </Link></Menu.Item>
