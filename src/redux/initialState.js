@@ -1,5 +1,6 @@
 const initialState = {
-    categories: []
+    categories: [],
+    user: null
 }
 
 export default initialState;
