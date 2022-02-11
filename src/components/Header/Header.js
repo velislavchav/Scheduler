@@ -15,8 +15,9 @@ import ServicesMenu from './ServicesMenu';
 
 // Helpers
 import headerContent from "./HeaderContent";
+import UserMenu from './UserMenu';
 
-function Header({ categories, loadCategories, setNewLanguage, language}) {
+function Header({ categories, loadCategories, user, setNewLanguage, language}) {
     useEffect(() => {
         loadCategories();
     }, [])
@@ -29,13 +30,9 @@ function Header({ categories, loadCategories, setNewLanguage, language}) {
                 </Link>
                 <Menu className="header-menu-container" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                     <Menu.Item key="home"><Link to={"/"}>{ headerContent[language].home }</Link></Menu.Item>
-                    <Menu.Item key="add"><Link to={"/services/add"}>{ "DOBAVI" }</Link></Menu.Item>
+                    {/* {user ? <Menu.Item key="add"><Link to={"/services/add"}>{ "DOBAVI" }</Link></Menu.Item> : <></>} */}
                     <ServicesMenu categories={categories} servicesTranslated={headerContent[language].services} language={language}/>
-                    <Menu.SubMenu key="my-profile" icon={<UserOutlined />} title={ headerContent[language].myProfile}>
-                        <Menu.Item key="profile"><Link to={"/profile"}> { headerContent[language].profile } </Link></Menu.Item>
-                        <Menu.Item key="schedule"> { headerContent[language].schedule } </Menu.Item>
-                        <Menu.Item key="logout"> { headerContent[language].logout } </Menu.Item>
-                    </Menu.SubMenu>
+                    <UserMenu translatedContent={headerContent[language]} user={user} />
                     <Menu.SubMenu key="languages" icon={<GlobalOutlined />} >
                         <Menu.Item key="ENG" onClick={setNewLanguage} value="ENG"> {headerContent[language].languageENG} </Menu.Item>
                         <Menu.Item key="BG" onClick={setNewLanguage} value="BG"> {headerContent[language].languageBG} </Menu.Item>
@@ -49,6 +46,7 @@ function Header({ categories, loadCategories, setNewLanguage, language}) {
 function mapStateToProps(state) {
     return {
         categories: state.categories,
+        user: state.user
     }
 }
 

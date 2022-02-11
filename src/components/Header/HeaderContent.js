@@ -5,6 +5,8 @@ const content = {
         profile: "Профил",
         schedule: "График",
         logout: "Изход",
+        login: "Вписване",
+        register: "Регистрация",
         services: "Услуги",
         languageBG: "Български",
         languageENG: "Английски"
@@ -15,6 +17,8 @@ const content = {
         profile: "Profile",
         schedule: "Schedule",
         logout: "Logout",
+        login: "Sign in",
+        register: "Sign up",
         services: "Services",
         languageBG: "Bulgarian",
         languageENG: "English"

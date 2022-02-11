@@ -14,6 +14,7 @@ import Home from './Home/Home';
 import Activities from './Activities/Activities';
 import AddActivity from './Activities/AddActivity/AddActivity';
 import Login from './User/Login/Login';
+import Register from './User/Register/Register';
 
 function App() {
   const [language, setLanguage] = useState("BG");
@@ -46,6 +47,7 @@ function App() {
         {/* GeneralRouteOnly */}
         <Route element={<GeneralRouteOnly />} >
           <Route path="/user/login" element={<Login language={language} />} />
+          <Route path="/user/register" element={<Register language={language} />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes >

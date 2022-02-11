@@ -1,5 +1,5 @@
 import { userActions } from "./actionTypes";
-import { registerUser } from "../../api/activitiesApi";
+import { registerUser, loginUser } from "../../api/userApi";
 import { handleApiError } from "../../utils/errorHandling"
 
 const registerUserSuccess = (userData) => {
