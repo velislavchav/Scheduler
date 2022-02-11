@@ -5,8 +5,7 @@ import { loadCategories } from '../../../redux/actions/categoriesAction';
 import { makeCategoryTitleToUrlSafeTitle } from "../../../utils/helpers";
 import { content, validationMessages } from "./AddActivityContent";
 import WorkTime from "./WorkTime";
-import 'antd/dist/antd.css';
-import { Typography, Form, Input, Cascader, DatePicker, Button} from 'antd';
+import { Form, Input, Cascader, DatePicker, Button} from 'antd';
 
 const makeCategoriesToCascaderOptions = (categories = [], language = "BG") => {
     let result = [];
