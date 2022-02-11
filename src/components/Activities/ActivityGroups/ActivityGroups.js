@@ -12,7 +12,10 @@ export default function ActivityGroups({ selectedCategory = "", selectedSubcateg
 
     useEffect(() => {
         getActivitiesByCategory(selectedCategory, selectedSubcategory)
-            .then(result => setActivities(result))
+            .then(result => {
+                setActivities(result)
+                console.log(result)
+            })
     }, [selectedCategory, selectedSubcategory]);
 
     return (
@@ -21,7 +24,7 @@ export default function ActivityGroups({ selectedCategory = "", selectedSubcateg
                 {dividerTextTranslated}
             </Divider>
             {activities.length > 0 ? activities.map(activity => {
-                return <ActivityCard key={activity.id} activity={activity} language={language} />
+                return <ActivityCard key={activity._id} activity={activity} language={language} />
             }) : <span> {language === "BG" ? "Няма намерени резултати." : "No results found."} </span>}
         </article>
     )

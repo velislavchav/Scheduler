@@ -23,13 +23,37 @@ export const isObjectEmpty = (obj) => {
     return Object.keys(obj).length === 0;
 }
 
+export const isExistingObjectKey = (obj, searchedKey) => {
+    return Object.keys(obj).findIndex(key => key === searchedKey) === -1 ? false : true;
+}
+
+// export const formatActivitiesByCategory = (activities = []) => {
+//     let result = {};
+
+//     activities.forEach(activity => {
+//         const activityCategory = makeStringToObjKey(activity.category) || null;
+//         const activitySubcategory = makeStringToObjKey(activity.subcategory) || null;
+
+//         if (activityCategory && activitySubcategory) {
+//             const isExistingCategoryInResult = isExistingObjectKey(result, activityCategory);
+//             if (!isExistingCategoryInResult) {
+//                 result[activityCategory] = {};
+//                 result[activityCategory][activitySubcategory] = [];
+//             }
+
+//             result[activityCategory][activitySubcategory].push(activity);
+//         }
+//     })
+//     return result;
+// }
+
 export const getSelectedCategoryTranslated = (selectedCategory, selectedSubcategory, categoriesData) => {
     let result = {
         category: {},
         subcategory: {}
     };
 
-    if(!isObjectEmpty(categoriesData)) {
+    if (!isObjectEmpty(categoriesData)) {
         const categoryFound = categoriesData.find(categoryObj => makeCategoryTitleToUrlSafeTitle(categoryObj.title) === selectedCategory);
         result.category.title = categoryFound?.title || "";
         result.category.titleBG = categoryFound?.titleBG || "";
@@ -41,6 +65,6 @@ export const getSelectedCategoryTranslated = (selectedCategory, selectedSubcateg
         result.subcategory.description = subcategoryFound?.description || "";
         result.subcategory.descriptionBG = subcategoryFound?.descriptionBG || "";
     }
-    
+
     return result;
 }

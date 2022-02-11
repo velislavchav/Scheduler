@@ -27,9 +27,9 @@ export default function Sidemenu({ categories, selectedCategory = "", selectedSu
                     {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </Menu.Item>
                 {categories.map(category => {
-                    return <Menu.SubMenu key={category.title?.toLocaleLowerCase()} title={language === "BG" ? category.titleBG : category.title}>
+                    return <Menu.SubMenu key={category._id} title={language === "BG" ? category.titleBG : category.title}>
                         {category.subcategories.map(subcategory => {
-                            return <Menu.Item key={subcategory.title?.toLocaleLowerCase()}>
+                            return <Menu.Item key={subcategory._id}>
                                 <Link to={"/services" + subcategory.url}>{language === "BG" ? subcategory.titleBG : subcategory.title}</Link>
                             </Menu.Item>
                         })}
